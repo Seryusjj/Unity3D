@@ -10,6 +10,9 @@ public class ScriptPlayer : MonoBehaviour
     //this two must be public in order to allow the designer to change it's value from the editor
     public const string targetTagName = "enemy";
     public float rayDistance = 100;
+    private int points;
+    public float gametime = 20.0F;//the time that the game will last in secodns
+    public int pointsToWin = 360;
 
 
     /// <summary>
@@ -19,6 +22,40 @@ public class ScriptPlayer : MonoBehaviour
     {
         GetMouseButton();
     }
+
+
+    /// <summary>
+    /// Method used for initialization
+    /// </summary>
+    void Start()
+    {
+        InvokeRepeating("ConsumeGameTime", 1.0F, 1.0F);
+    }
+
+    /// <summary>
+    /// Substract the game time and swicht the scene
+    /// </summary>
+    private void ConsumeGameTime()
+    {
+        if (--gametime == 0)
+        {
+            //calcel the countdown when time == 0
+            CancelInvoke("ConsumeGameTime");
+            WinOrLose();
+            
+        }
+    }
+
+    private void WinOrLose() {
+        if (points< 500)
+        {
+            Application.LoadLevel("sceneScreenLose");
+        }
+        else {
+            Application.LoadLevel("sceneScreenWin");
+        }
+    }
+
 
     /// <summary>
     /// Check in yo hit yuo hit the object that is in the position that you're pointing at
@@ -46,6 +83,12 @@ public class ScriptPlayer : MonoBehaviour
         {
             ScriptEnemy enemyscript = hit.transform.GetComponent<ScriptEnemy>();
             enemyscript.numberOfclicks -= 1;
+            //add points when destroying a shape
+            if (enemyscript.numberOfclicks <= 0)
+            {
+                points += enemyscript.enemyPoint;
+            }
+
             Debug.Log("you hit an enemy.");
         }
         else
@@ -69,4 +112,14 @@ public class ScriptPlayer : MonoBehaviour
         }
 
     }
+
+    /// <summary>
+    /// Show what the user should see on the screen, this function is call by the Unity engine 
+    /// </summary>
+    void OnGUI()
+    {
+        GUI.Label(new Rect(10,10,100,20),"Score: "+points);
+        GUI.Label(new Rect(10, 25, 100, 35), "Time: " + gametime);
+    }
+
 }

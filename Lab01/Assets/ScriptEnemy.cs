@@ -9,15 +9,15 @@ public class ScriptEnemy : MonoBehaviour
     public float respawnWaitTime = 2.0F;
     public Color[] shapeColor;
     public Transform explosion;
+    public int enemyPoint = 0;
 
     /// <summary>
-    /// Use this for initialization
+    /// Method used for initialization
     /// </summary>
-    /// <param name="?"></param>
-    /// <returns></returns> 
-	void Start () {
+    void Start()
+    {
         restoreNMumberOfclicks = numberOfclicks;
-	}
+    }
     void Update()
     {
         Move();
@@ -30,9 +30,7 @@ public class ScriptEnemy : MonoBehaviour
             if (explosion)
             {
 
-                Transform instance = (Transform)Instantiate(explosion, transform.position, transform.rotation);//Create an explosion at the same position and rotation than this object enemy
-                //Como no hay  opcion autodestroy  que dice el video, decimos que elimine el objeto instanciado en 5s
-                Destroy(instance.gameObject, 5);
+                CreateExplosions();
 
             }
             var position = new Vector3(Random.Range(-6, 6), Random.Range(-4, 4), 0);
@@ -40,6 +38,14 @@ public class ScriptEnemy : MonoBehaviour
             transform.position = position;
             numberOfclicks = restoreNMumberOfclicks;
         }
+    }
+
+    private void CreateExplosions()
+    {
+        Transform instance = (Transform)Instantiate(explosion, transform.position, transform.rotation);//Create an explosion at the same position and rotation than this object enemy
+        //Como no hay  opcion autodestroy  que dice el video, decimos que elimine el objeto instanciado en 5s
+        Destroy(instance.gameObject, 5);
+
     }
     private IEnumerator RespawnWaitTime()
     {
