@@ -3,9 +3,9 @@
 .*.swp
 .DS_STORE
 
-#
+#Unity compile and temp files must be omited
 
 
-Lab01/obj/
-Lab01/Library/
-Lab01/Temp/
+*/obj/
+*/Library/
+*/Temp/
