@@ -1,39 +1,59 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ScriptEnemy : MonoBehaviour {
+public class ScriptEnemy : MonoBehaviour
+{
 
-    public  int numberOfclicks = 2;
+    public int numberOfclicks = 2;
+    private int restoreNMumberOfclicks;
     public float respawnWaitTime = 2.0F;
     public Color[] shapeColor;
-    
+    public Transform explosion;
 
-	
-
-	void Update () {
-        Move();
+    /// <summary>
+    /// Use this for initialization
+    /// </summary>
+    /// <param name="?"></param>
+    /// <returns></returns> 
+	void Start () {
+        restoreNMumberOfclicks = numberOfclicks;
 	}
+    void Update()
+    {
+        Move();
+    }
 
-    private void Move() {
+    private void Move()
+    {
         if (numberOfclicks <= 0)
         {
+            if (explosion)
+            {
+
+                Transform instance = (Transform)Instantiate(explosion, transform.position, transform.rotation);//Create an explosion at the same position and rotation than this object enemy
+                //Como no hay  opcion autodestroy  que dice el video, decimos que elimine el objeto instanciado en 5s
+                Destroy(instance.gameObject, 5);
+
+            }
             var position = new Vector3(Random.Range(-6, 6), Random.Range(-4, 4), 0);
             StartCoroutine(RespawnWaitTime());
             transform.position = position;
-            numberOfclicks = 2;
+            numberOfclicks = restoreNMumberOfclicks;
         }
     }
-    private IEnumerator RespawnWaitTime(){
+    private IEnumerator RespawnWaitTime()
+    {
         renderer.enabled = false;
         RandomColor();
         yield return new WaitForSeconds(respawnWaitTime);
         renderer.enabled = true;
-        
+
     }
 
 
 
-    private void RandomColor() {
+    private void RandomColor()
+    {
         if (shapeColor.Length > 0)
         {
             var newColor = Random.Range(0, shapeColor.Length);
