@@ -12,7 +12,7 @@ public class ScriptPlayer : MonoBehaviour
     public float rayDistance = 100;
     private int points;
     public float gametime = 20.0F;//the time that the game will last in secodns
-    public int pointsToWin = 360;
+    public int pointsToWin = 200;
 
 
     /// <summary>
@@ -47,7 +47,7 @@ public class ScriptPlayer : MonoBehaviour
     }
 
     private void WinOrLose() {
-        if (points< 500)
+        if (points< pointsToWin)
         {
             Application.LoadLevel("sceneScreenLose");
         }

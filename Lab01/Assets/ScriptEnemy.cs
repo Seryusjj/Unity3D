@@ -17,14 +17,14 @@ public class ScriptEnemy : MonoBehaviour
     void Start()
     {
         restoreNMumberOfclicks = numberOfclicks;
+        Move();
     }
     void Update()
     {
-        Move();
+        Realocate();
     }
 
-    private void Move()
-    {
+    private void Realocate() {
         if (numberOfclicks <= 0)
         {
             if (explosion)
@@ -33,12 +33,20 @@ public class ScriptEnemy : MonoBehaviour
                 CreateExplosions();
 
             }
-            var position = new Vector3(Random.Range(-6, 6), Random.Range(-4, 4), 0);
-            StartCoroutine(RespawnWaitTime());
-            transform.position = position;
-            numberOfclicks = restoreNMumberOfclicks;
+            Move();
+            
         }
+
     }
+
+    private void Move()
+    {
+        var position = new Vector3(Random.Range(-6, 6), Random.Range(-4, 4), 0);
+        StartCoroutine(RespawnWaitTime());
+        transform.position = position;
+        numberOfclicks = restoreNMumberOfclicks;
+    }
+
 
     private void CreateExplosions()
     {
