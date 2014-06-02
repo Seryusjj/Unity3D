@@ -5,6 +5,7 @@ public class ScriptEnemy : MonoBehaviour {
 
     public  int numberOfclicks = 2;
     public float respawnWaitTime = 2.0F;
+    public Color[] shapeColor;
     
 
 	
@@ -16,7 +17,6 @@ public class ScriptEnemy : MonoBehaviour {
     private void Move() {
         if (numberOfclicks <= 0)
         {
-            Debug.Log("Move");
             var position = new Vector3(Random.Range(-6, 6), Random.Range(-4, 4), 0);
             StartCoroutine(RespawnWaitTime());
             transform.position = position;
@@ -24,19 +24,21 @@ public class ScriptEnemy : MonoBehaviour {
         }
     }
     private IEnumerator RespawnWaitTime(){
-        Debug.Log("RespawnWaitTime()");
         renderer.enabled = false;
-        
+        RandomColor();
         yield return new WaitForSeconds(respawnWaitTime);
         renderer.enabled = true;
         
     }
 
 
-    private  void WaitForSeconds() {
-        renderer.material.color = Color.red;
-    }
 
-    private void RandomColor() { 
+    private void RandomColor() {
+        if (shapeColor.Length > 0)
+        {
+            var newColor = Random.Range(0, shapeColor.Length);
+            renderer.material.color = shapeColor[newColor];
+        }
+
     }
 }
