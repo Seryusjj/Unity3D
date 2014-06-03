@@ -49,6 +49,12 @@
      <Compile Include="Assets\ScriptAsteroid.cs" />
      <Compile Include="Assets\ScriptBlock.cs" />
      <Compile Include="Assets\ScriptPlayer.cs" />
+     <Compile Include="Assets\ScriptSceneManager.cs" />
+     <Compile Include="Assets\ScriptScreenCredits.cs" />
+     <Compile Include="Assets\ScriptScreenLoad.cs" />
+     <Compile Include="Assets\ScriptScreenLose.cs" />
+     <Compile Include="Assets\ScriptScreenMainMenu.cs" />
+     <Compile Include="Assets\ScriptScreenWin.cs" />
      <Compile Include="Assets\ScritBullet.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -6,6 +6,7 @@ public class ScritBullet : MonoBehaviour
     //inspector ariables
     public float bulletSpeed = 15.0F;
     public Transform explosion;
+    public GameObject sceneManager;
 
     //private variables
     private Vector3 cameraWorldLimits;
@@ -67,6 +68,9 @@ public class ScritBullet : MonoBehaviour
             if (explosion) {
                 Instantiate(explosion, transform.position, transform.rotation);
             }
+            //tell the scene manager that we destroyed an enemy and add a point to the score
+            sceneManager.transform.GetComponent<ScriptSceneManager>().AddScore();
+
             //consume the bullet
             Destroy(gameObject);
         }

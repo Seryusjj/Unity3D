@@ -9,7 +9,7 @@ public class ScriptPlayer : MonoBehaviour
     public float playerSpeedHorizontal = 10.0F;
     public Transform proyectile;
     public Transform socketProyectile;
-
+    public int numberOfShields = 4;
     //private variables
     private Vector3 cameraWorldLimits;
 
@@ -58,7 +58,7 @@ public class ScriptPlayer : MonoBehaviour
         CheckLimits();
     }
     /// <summary>
-    /// check the limits on a orthographic camera no matter wich resolution you use
+    /// check the limits on an orthographic camera no matter wich resolution you use
     /// </summary>
     private void CheckLimits()
     {
