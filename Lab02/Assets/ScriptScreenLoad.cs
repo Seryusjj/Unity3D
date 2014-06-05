@@ -32,7 +32,7 @@ public class ScriptScreenLoad : MonoBehaviour
         //Instructios for the player
         GUI.Label(new Rect(10,30,140,40),"Arro keys to move");
         GUI.Label(new Rect(10, 60, 160, 70), "Space bar to shot");
-        GUI.Label(new Rect(10, 90, 160, 100), "Esc to Quit the Game");
+        GUI.Label(new Rect(10, 90, 160, 100), "Letter E to activate shield");
 
         //End the group we started from above
         GUI.EndGroup();

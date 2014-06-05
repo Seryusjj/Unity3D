@@ -7,6 +7,7 @@ public class ScritBullet : MonoBehaviour
     public float bulletSpeed = 15.0F;
     public Transform explosion;
     public GameObject sceneManager;
+    public AudioClip audioclip;
 
     //private variables
     private Vector3 cameraWorldLimits;
@@ -67,6 +68,7 @@ public class ScritBullet : MonoBehaviour
 
             if (explosion) {
                 Instantiate(explosion, transform.position, transform.rotation);
+                AudioSource.PlayClipAtPoint(audioclip,transform.position);
             }
             //tell the scene manager that we destroyed an enemy and add a point to the score
             sceneManager.transform.GetComponent<ScriptSceneManager>().AddScore();

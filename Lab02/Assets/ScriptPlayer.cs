@@ -10,8 +10,11 @@ public class ScriptPlayer : MonoBehaviour
     public Transform proyectile;
     public Transform socketProyectile;
     public int numberOfShields = 4;
+    public Transform shieldMesh;
+
     //private variables
     private Vector3 cameraWorldLimits;
+    public bool shieldOn;
 
     // Use this for initialization
     void Start()
@@ -35,15 +38,18 @@ public class ScriptPlayer : MonoBehaviour
     {
         Controller();
         CreateBullet();
+        UseShield();
     }
 
     /// <summary>
-    /// Shot to an enemy when pressing down the space bar
+    /// Shoot to an enemy when pressing down the space bar
     /// </summary>
     private void CreateBullet()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && proyectile!=null) {
-            Instantiate(proyectile,socketProyectile.position,socketProyectile.rotation);
+        if (Input.GetKeyDown(KeyCode.Space) && proyectile != null)
+        {
+            Instantiate(proyectile, socketProyectile.position, socketProyectile.rotation);
+            audio.Play();
         }
     }
 
@@ -52,9 +58,9 @@ public class ScriptPlayer : MonoBehaviour
     {
         //la velocidad de movimiento ira siempre en funcion de la velocidad del ordenador sobre
         //el que se ejecuta el juego por eso usamos Time.deltaTime
-        float transV = Input.GetAxis("Vertical")*playerSpeedVertical * Time.deltaTime;
-        float transH= Input.GetAxis("Horizontal") * playerSpeedHorizontal * Time.deltaTime;
-        transform.Translate(transH,transV,0);
+        float transV = Input.GetAxis("Vertical") * playerSpeedVertical * Time.deltaTime;
+        float transH = Input.GetAxis("Horizontal") * playerSpeedHorizontal * Time.deltaTime;
+        transform.Translate(transH, transV, 0);
         CheckLimits();
     }
     /// <summary>
@@ -65,6 +71,26 @@ public class ScriptPlayer : MonoBehaviour
         //si llegas al limite, la posicion de la figura será igual al limite.
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, -cameraWorldLimits.x, cameraWorldLimits.x), transform.position.y, transform.position.z);
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -cameraWorldLimits.y, cameraWorldLimits.y), transform.position.z);
+
+    }
+
+    
+
+    /// <summary>
+    /// The player use the shield by pressing down de key 'E'
+    /// </summary>
+    private void UseShield()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (!shieldOn && numberOfShields >0)
+            {
+                Transform shield = (Transform)Instantiate(shieldMesh, transform.position, transform.rotation);
+                shield.transform.parent = gameObject.transform;
+                shieldOn = true;
+                numberOfShields--;
+            }
+        }
 
     }
 }

@@ -7,6 +7,8 @@ public class ScriptAsteroid : MonoBehaviour
     public float asteroidSpeed = 6.0F;
     public Transform explosion;
     public GameObject sceneManager;
+    public AudioClip shieldExplosion;
+    public AudioClip playerDamageAudio;
 
     //private variables
     private Vector3 cameraWorldLimits;
@@ -15,6 +17,7 @@ public class ScriptAsteroid : MonoBehaviour
     {
         CalculateLimits();
         MoveDown();
+        RandomMove();
     }
     /// <summary>
     /// Calculate the game limits, call on Startupbecause just need to calculate it once
@@ -75,13 +78,28 @@ public class ScriptAsteroid : MonoBehaviour
     /// <param name="other"></param>
     void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag.Equals("shield"))
+        {
 
-        if (other.gameObject.tag.Equals("Player"))
+
+            if (explosion)
+            {
+                audio.clip = shieldExplosion;
+                audio.Play();
+                Instantiate(explosion, transform.position, transform.rotation);
+            }
+            //consume the asteroid
+            RandomMove();
+        }
+
+        else if (other.gameObject.tag.Equals("Player"))
         {
 
             sceneManager.transform.GetComponent<ScriptSceneManager>().SubstractLife();
             if (explosion)
             {
+                audio.clip = playerDamageAudio;
+                audio.Play();
                 Instantiate(explosion, transform.position, transform.rotation);
             }
             //consume the asteroid

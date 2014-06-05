@@ -55,6 +55,7 @@
      <Compile Include="Assets\ScriptScreenLose.cs" />
      <Compile Include="Assets\ScriptScreenMainMenu.cs" />
      <Compile Include="Assets\ScriptScreenWin.cs" />
+     <Compile Include="Assets\ScriptShield.cs" />
      <Compile Include="Assets\ScritBullet.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
