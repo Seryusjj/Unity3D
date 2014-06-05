@@ -62,7 +62,7 @@ public class CustomTools
 
     private static void CreateNewPrefab(String path, GameObject selected)
     {
-        Debug.Log(path);
+
         var newPrefab = PrefabUtility.CreateEmptyPrefab(path);
         PrefabUtility.ReplacePrefab(selected, newPrefab);
         AssetDatabase.Refresh();
@@ -90,7 +90,7 @@ public class CustomTools
         System.IO.Directory.CreateDirectory(applicationPath + "Resources");
         System.IO.Directory.CreateDirectory(applicationPath + "Shaders");
         System.IO.Directory.CreateDirectory(applicationPath + "Packages");
-        System.IO.Directory.CreateDirectory(applicationPath + "Physics");
+        System.IO.Directory.CreateDirectory(applicationPath + "Scenes");
         AssetDatabase.Refresh();
 
     }
