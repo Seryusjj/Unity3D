@@ -31,7 +31,7 @@ public class Stept5 : MonoBehaviour
             startTime = Time.time;
 
         }
-        CalculateFromStartTime();
+        fromStartTime = Time.time - startTime;
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {

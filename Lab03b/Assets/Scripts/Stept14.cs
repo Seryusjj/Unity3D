@@ -7,41 +7,41 @@ using System.Collections;
 public class Stept14 : MonoBehaviour
 {
     //part 2
-    public float playTime;
-    public float days = 0F;
-    public float hours = 0F;
-    public float minutes = 0F;
-    public float seconds = 0F;
-    public float fractions = 0F;
+    private float playTime;
+    private float days = 0F;
+    private float hours = 0F;
+    private float minutes = 0F;
+    private float seconds = 0F;
+    private float fractions = 0F;
 
     // part 4
-    public float startTime = 0F;
-    public float fromStartTime = 0F;
+    private float startTime = 0F;
+    private float fromStartTime = 0F;
     public bool playTimeEnabled = true;
 
     //part 5
-    public float fromLoadTime = 0F;
+    private float fromLoadTime = 0F;
 
     //part 6
-    public float stopTime = 0F;
-    public float pauseGameTime = 0F;
+    private float stopTime = 0F;
+    private float pauseGameTime = 0F;
     //part 7
-    public float continueTime = 0F;
+    private float continueTime = 0F;
 
     //stept 9
-    public float countDowndelay = 0F;
+    private float countDowndelay = 0F;
     public float countDownAmount = 0F;
 
     //stept 10
-    public float delayTime = 0F;
+    private float delayTime = 0F;
     public float delayedAmount = 0F;
 
     //styept 11
-    public float addToTimeAmount = 0F;
+    private float addToTimeAmount = 0F;
     public float timeAmount = 0F;
 
     //stept 12
-    public float actualTime = 0F;
+    private float actualTime = 0F;
 
     //stept13
     public bool countDownEnabled = false;
@@ -57,39 +57,138 @@ public class Stept14 : MonoBehaviour
     void Update()
     {
 
-        playTime = Time.time;
-        days = (playTime / 86400) % 365;
-        hours = (playTime / 3600) % 24;
-        minutes = (playTime / 60) % 60;
-        seconds = (playTime % 60);
-        fractions = (playTime * 10) % 10;
+        Stept2();
+        Stept3();
+        Stept4();
+        Stept5();
+        stept6();
+        Stept7();
+        Stept8();
+        Stept9();
+        Stept12();
+        Stept10();
+
+
+    }
+
+    private void Stept3()
+    {
         //stept 1: start time
         if (playTimeEnabled)
         {
             playTime = Time.time - continueTime + addToTimeAmount;
         }
 
-        if (!playTimeEnabled && countDownEnabled)
+        if (playTimeEnabled && countDownEnabled)
         {
             //current time since start
             playTime = countDowndelay - Time.time + countDownAmount;
         }
+    }
 
-        
+    private void Stept2()
+    {
+
+        playTime = Time.time;
+        days = (playTime / 86400) % 365;
+        hours = (playTime / 3600) % 24;
+        minutes = (playTime / 60) % 60;
+        seconds = (playTime % 60);
+        fractions = (playTime * 10) % 10;
+    }
+
+    private void Stept12()
+    {
+        //stept 0 actual time since game start
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            actualTime = Time.realtimeSinceStartup;
+        }
+    }
+
+    private void Stept10()
+    {
+           //stept 10 dealay amount /rate
+        if (playTime > delayTime)
+        {
+            delayTime = Time.time + delayedAmount;
+            Debug.Log("Delayed amount for" + delayedAmount);
+        }
+    }
+    private void Stetpt11()
+    {
+        //stetpt 8 add to time a single / once
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            addToTimeAmount = timeAmount;
+        }
+        //stept 9 add to time (continuous)
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            addToTimeAmount += timeAmount;
+        }
+    }
+
+    private void Stept9()
+    {
+        //stept 7 count down time
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+
+            countDowndelay = Time.time;
+            playTimeEnabled = true;
+            countDownEnabled = true;
+        }
+        if (playTime < 0)
+        {
+            countDownEnabled = false;
+        }
+    }
+
+    private void Stept8()
+    {
+        //stept 6 reset time
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            playTime = 0F;
+            stopTime = 0F;
+            playTimeEnabled = false;
+        }
+    }
+
+
+    private void Stept4()
+    {
+  
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             startTime = Time.time;
 
         }
         fromStartTime = Time.time - startTime;
+    }
 
-        //stept 2 from load time
+    private void Stept5()
+    {
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             //startTime equals original level load time
             fromLoadTime = Time.timeSinceLevelLoad;
         }
+    }
 
+    private void Stept7()
+    {
+        //step 5: continue time
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            continueTime = Time.time - playTime;
+            playTimeEnabled = true;
+        }
+    }
+
+    private void stept6()
+    {
         //stept 3: stop time (stoppin play time)
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
@@ -107,60 +206,6 @@ public class Stept14 : MonoBehaviour
             Time.timeScale = 1F;
         }
         pauseGameTime = Time.time;
-
-        //step 5: continue time
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            continueTime = Time.time - playTime;
-            playTimeEnabled = true;
-        }
-
-        //stept 6 reset time
-        if (Input.GetKeyDown(KeyCode.Alpha6))
-        {
-            playTime = 0F;
-            stopTime = 0F;
-            playTimeEnabled = false;
-        }
-
-        //stept 7 count down time
-        if (Input.GetKeyDown(KeyCode.Alpha7))
-        {
-            
-            countDowndelay = Time.time;
-            playTimeEnabled = false;
-            countDownEnabled = true;
-        }
-        if (playTime < 0)
-        {
-            playTimeEnabled = false; 
-        }
-
-        //stetpt 8 add to time a single / once
-        if (Input.GetKeyDown(KeyCode.Alpha8))
-        {
-            addToTimeAmount = timeAmount;
-        }
-        //stept 9 add to time (continuous)
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            addToTimeAmount += timeAmount;
-        }
-
-        //stept 0 actual time since game start
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            actualTime = Time.realtimeSinceStartup;
-        }
-
-        //stept 10 dealay amount /rate
-        if (playTime > delayTime)
-        {
-            delayTime = Time.time + delayedAmount;
-            Debug.Log("Delayed amount for" + delayedAmount);
-        }
-
-
     }
 
     void OnGUI()

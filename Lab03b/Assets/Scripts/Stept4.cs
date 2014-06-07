@@ -20,6 +20,7 @@ public class Stept4 : MonoBehaviour {
         {
             playTime = Time.time;
         }
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             startTime = Time.time;

@@ -61,7 +61,6 @@
      <Compile Include="Assets\Scripts\Stept7.cs" />
      <Compile Include="Assets\Scripts\Stept8.cs" />
      <Compile Include="Assets\Scripts\Stept9.cs" />
-     <Compile Include="Assets\Scripts\TimeManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
