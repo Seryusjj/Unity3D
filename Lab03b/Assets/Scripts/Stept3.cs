@@ -37,4 +37,12 @@ public class Stept3 : MonoBehaviour
         }
 
     }
+
+    void OnGUI()
+    {
+        GUILayout.Label("Play time: " + playTime);
+        GUILayout.Label("Minutes: " + minutes.ToString("0"));
+        GUILayout.Label("Seconds: " + seconds.ToString("0"));
+        GUILayout.Label("Fractions: " + fractions.ToString("0.000"));
+    }
 }

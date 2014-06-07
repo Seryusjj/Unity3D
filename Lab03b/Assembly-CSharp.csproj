@@ -48,8 +48,20 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\AnimationSprite.cs" />
      <Compile Include="Assets\Scripts\Stept1.cs" />
+     <Compile Include="Assets\Scripts\Stept10.cs" />
+     <Compile Include="Assets\Scripts\Stept11.cs" />
+     <Compile Include="Assets\Scripts\Stept12.cs" />
+     <Compile Include="Assets\Scripts\Stept13.cs" />
+     <Compile Include="Assets\Scripts\Stept14.cs" />
      <Compile Include="Assets\Scripts\Stept2.cs" />
      <Compile Include="Assets\Scripts\Stept3.cs" />
+     <Compile Include="Assets\Scripts\Stept4.cs" />
+     <Compile Include="Assets\Scripts\Stept5.cs" />
+     <Compile Include="Assets\Scripts\Stept6.cs" />
+     <Compile Include="Assets\Scripts\Stept7.cs" />
+     <Compile Include="Assets\Scripts\Stept8.cs" />
+     <Compile Include="Assets\Scripts\Stept9.cs" />
+     <Compile Include="Assets\Scripts\TimeManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
