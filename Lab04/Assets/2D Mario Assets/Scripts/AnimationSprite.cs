@@ -24,21 +24,22 @@ public class AnimationSprite
         this.framesPerSecond = framesPerSecond;
 
     }
+
     public void AnimateWithNormalMap(GameObject spriteObject, float gameTime)
     {
-        int index = (int)(gameTime * framesPerSecond);                      //time control fpd
+        int index = (int)(gameTime * framesPerSecond);       
         index = index % totalFrames;
 
-        Vector2 size = new Vector2(1.0F / columnSize, 1.0F / rowSize);          // scale
+        Vector2 size = new Vector2(1.0F / columnSize, 1.0F / rowSize);    
 
         int u = index % columnSize;
         int v = index / columnSize;
 
 
-        Vector2 offset = new Vector2((u + colFrameStart) * size.x, (1 - size.y) - ((v + rowFrameStart) * size.y));              //offset
+        Vector2 offset = new Vector2((u + colFrameStart) * size.x, (1 - size.y) - ((v + rowFrameStart) * size.y));    
 
-        spriteObject.renderer.material.mainTextureOffset = offset;                   //texture offset
-        spriteObject.renderer.material.mainTextureScale = size;                      //texture scale
+        spriteObject.renderer.material.mainTextureOffset = offset;              
+        spriteObject.renderer.material.mainTextureScale = size;                   
 
         spriteObject.renderer.material.SetTextureOffset("_BumpMap", offset);
         spriteObject.renderer.material.SetTextureScale("_BumpMap", size);
@@ -46,38 +47,38 @@ public class AnimationSprite
 
     public void Animate(GameObject spriteObject,float gameTime)
     {
-        int index = (int)(gameTime * framesPerSecond);                //time control fpd
+        int index = (int)(gameTime * framesPerSecond);               
         index = index % totalFrames;
-
-        Vector2 size = new Vector2(1.0F / columnSize, 1.0F / rowSize);          // scale
+       
+        Vector2 size = new Vector2(1.0F / columnSize, 1.0F / rowSize);          
 
         int u = index % columnSize;
         int v = index / columnSize;
 
-        Vector2 offset = new Vector2((u + colFrameStart) * size.x, (1 - size.y) - ((v + rowFrameStart) * size.y));              //offset
+        Vector2 offset = new Vector2((u + colFrameStart) * size.x, (1 - size.y) - ((v + rowFrameStart) * size.y));     
 
-        spriteObject.renderer.material.mainTextureOffset = offset;                   //texture offset
-        spriteObject.renderer.material.mainTextureScale = size;                      //texture scale
+        spriteObject.renderer.material.mainTextureOffset = offset;                   
+        spriteObject.renderer.material.mainTextureScale = size;                     
     }
 
     public void AnimateFont(GameObject spriteObject,float gameTime, string type)
     {
         int index = CalculateFontIndex(gameTime, type);
 
-        Vector2 size = new Vector2(1.0F / columnSize, 1.0F / rowSize);          // scale
+        Vector2 size = new Vector2(1.0F / columnSize, 1.0F / rowSize);         
 
         int u = index % columnSize;
         int v = index / columnSize;
 
-        Vector2 offset = new Vector2((u + colFrameStart) * size.x, (1 - size.y) - ((v + rowFrameStart) * size.y));              //offset
+        Vector2 offset = new Vector2((u + colFrameStart) * size.x, (1 - size.y) - ((v + rowFrameStart) * size.y));            
 
-        spriteObject.renderer.material.mainTextureOffset = offset;                   //texture offset
-        spriteObject.renderer.material.mainTextureScale = size;                      //texture scale
+        spriteObject.renderer.material.mainTextureOffset = offset;                   
+        spriteObject.renderer.material.mainTextureScale = size;                      
     }
 
     private int CalculateFontIndex(float gameTime, string type)
     {
-        int index = (int)(gameTime);                //time control fpd
+        int index = (int)(gameTime);                
         
 
         var font1 = index % 10;
@@ -92,4 +93,43 @@ public class AnimationSprite
 
         return index;        
     }
+
+
+    public AnimationSprite SetColumnSize(int columnSize)
+    {
+        this.columnSize = columnSize;
+        return this;
+    }
+    public AnimationSprite SetRowSize(int rowSize)
+    {
+        this.rowSize = rowSize;
+        return this;
+    }
+
+    public AnimationSprite SetTotalFrames(int totalFrames)
+    {
+        this.totalFrames = totalFrames;
+        return this;
+    }
+
+    public AnimationSprite SetFramesPerSecond(int framesPerSecond)
+    {
+        this.framesPerSecond = framesPerSecond;
+        return this;
+    }
+
+    public AnimationSprite SetRowFrameStart(int rowFrameStart)
+    {
+        this.rowFrameStart = rowFrameStart;
+        return this;
+    }
+
+    
+    public AnimationSprite SetColFrameStart(int colFrameStart)
+    {
+        this.colFrameStart = colFrameStart;
+        return this;
+    }
+
+
 }
