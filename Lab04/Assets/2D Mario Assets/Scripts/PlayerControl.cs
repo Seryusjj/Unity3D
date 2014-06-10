@@ -13,7 +13,7 @@ public class PlayerControl : MonoBehaviour
     //particles
     public Transform particleJump;
 
-
+    public Vector3 stratPosition;//for the zoom
 
     //private variables
     private float walkSpeed = 1.5F;
@@ -51,7 +51,7 @@ public class PlayerControl : MonoBehaviour
 
 
 
-    private IEnumerator PlayCorrutineSound(AudioClip soundName, float soundDelay)
+    private IEnumerator PlaySoundCorrutine(AudioClip soundName, float soundDelay)
     {
         if (!audio.isPlaying && Time.time > soundRate)
         {
@@ -65,7 +65,7 @@ public class PlayerControl : MonoBehaviour
 
     private void PlaySound(AudioClip soundName, float soundDelay)
     {
-        StartCoroutine(PlayCorrutineSound(soundName, soundDelay));
+        StartCoroutine(PlaySoundCorrutine(soundName, soundDelay));
 
     }
     /// <summary>
@@ -218,6 +218,7 @@ public class PlayerControl : MonoBehaviour
             jumpEnabled = false;
             runJumpEnabled = false;
             crouchJumpEnabled = false;
+            stratPosition = transform.position; //this is for the camera to substract on zooming out
         }
     }
 
