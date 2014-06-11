@@ -103,7 +103,7 @@ public class ScriptPlayer : MonoBehaviour
     private void GetMouseButton()
     {
 
-        if (Input.GetMouseButton(LEFTCLICK))
+        if (Input.GetMouseButtonDown(LEFTCLICK))
         {
 
             Debug.Log("Pressed left click.");
